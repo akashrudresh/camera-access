@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Camera</title>
+</head>
+<body>
+
+    <h2>Access Your Camera</h2>
+    <p>Click the button below to enable the camera:</p>
+
+    <!-- Button to trigger the camera access -->
+    <button onclick="startCamera()">Enable Camera</button>
+
+    <!-- Video element to display the camera stream -->
+    <video id="cameraStream" width="100%" height="auto" autoplay></video>
+
+    <script>
+        // Function to request camera access and start displaying the stream
+        function startCamera() {
+            // Check if the browser supports the getUserMedia API
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                // Request camera access (video only)
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function(stream) {
+                        // Get the video element
+                        var videoElement = document.getElementById('cameraStream');
+                        // Set the video element's source to the camera stream
+                        videoElement.srcObject = stream;
+                    })
+                    .catch(function(error) {
+                        // If there was an error (e.g., user denied the camera permission)
+                        alert('Error accessing the camera: ' + error.message);
+                    });
+            } else {
+                alert('Camera access is not supported by your browser.');
+            }
+        }
+    </script>
+
+    <hr>
+
+    <!-- WhatsApp Share Link -->
+    <h3>Share this page with others:</h3>
+    <a href="https://wa.me/?text=Click%20here%20to%20enable%20the%20camera%20on%20your%20device:%20http://your-website.com/access-camera.html" target="_blank">
+        Click to Share on WhatsApp
+    </a>
+
+    <hr>
+
+    <!-- QR Code for the page -->
+    <h3>Or scan the QR code:</h3>
+    <img src="https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=http://your-website.com/access-camera.html" alt="QR Code for Camera Access">
+
+</body>
+</html>
